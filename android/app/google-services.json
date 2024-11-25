@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "131659268023",
+    "project_id": "universitycanteen-505e5",
+    "storage_bucket": "universitycanteen-505e5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131659268023:android:60b8498eeaab587952b232",
+        "android_client_info": {
+          "package_name": "com.example.canteen_food_ordering_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-Cg69u-OizXO3zgafLUTHu4k1ICOsL5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

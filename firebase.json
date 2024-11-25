@@ -1,0 +1,31 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "universitycanteen-505e5",
+          "appId": "1:131659268023:android:60b8498eeaab587952b232",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "universitycanteen-505e5",
+          "configurations": {
+            "android": "1:131659268023:android:60b8498eeaab587952b232",
+            "ios": "1:131659268023:ios:cb06ca976a8777d952b232",
+            "web": "1:131659268023:web:7c299ea1ac19c24452b232"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
