@@ -51,7 +51,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           IconButton(
             icon: Icon(
               Icons.exit_to_app,
-              color: Colors.white,
+              color: Colors.black,
             ),
             onPressed: () {
               signOutUser();

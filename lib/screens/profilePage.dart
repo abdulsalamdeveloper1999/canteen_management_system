@@ -1,4 +1,5 @@
 import 'package:canteen_food_ordering_app/apis/foodAPIs.dart';
+import 'package:canteen_food_ordering_app/new_added_features/utils/firestore_utils.dart';
 import 'package:canteen_food_ordering_app/notifiers/authNotifier.dart';
 import 'package:canteen_food_ordering_app/screens/orderDetails.dart';
 import 'package:canteen_food_ordering_app/widgets/customRaisedButton.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../new_added_features/screens/order_list_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -55,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
             icon: Icon(
               Icons.exit_to_app,
-              color: Colors.white,
+              color: Colors.black,
             ),
             onPressed: () {
               signOutUser();
@@ -147,7 +150,13 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               textAlign: TextAlign.left,
             ),
-            myOrders(authNotifier.userDetails.uuid),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => UserOrdersPage()));
+                },
+                child: Text('Show Orders'))
+            // myOrders(FirestoreUtils.userUid),
           ],
         ),
       ),
@@ -197,7 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
           return Container(
             padding: EdgeInsets.symmetric(vertical: 20),
             width: MediaQuery.of(context).size.width * 0.6,
-            child: Text(""),
+            child: Text("No Data"),
           );
         }
       },

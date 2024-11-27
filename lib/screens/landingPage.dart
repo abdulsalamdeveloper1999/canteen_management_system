@@ -16,10 +16,10 @@ class _LandingPageState extends State<LandingPage> {
   void initState() {
     super.initState();
     // Initialize current user without triggering rebuilds
-  Future.microtask((){
-  final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    initializeCurrentUser(authNotifier, context);
-  });
+    Future.microtask(() {
+      final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+      initializeCurrentUser(authNotifier, context);
+    });
   }
 
   @override
@@ -52,7 +52,8 @@ class _LandingPageState extends State<LandingPage> {
                 fontSize: 60,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                fontFamily: 'MuseoModerno', // Ensure this font is added to pubspec.yaml
+                fontFamily:
+                    'MuseoModerno', // Ensure this font is added to pubspec.yaml
               ),
             ),
             const SizedBox(height: 140),
@@ -64,18 +65,11 @@ class _LandingPageState extends State<LandingPage> {
                     context,
                     MaterialPageRoute(builder: (_) => LoginPage()),
                   );
-                } else if (authNotifier.userDetails == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Loading user details, please wait...'),
-                    ),
-                  );
                 } else {
                   final route = authNotifier.userDetails.role == 'admin'
                       ? MaterialPageRoute(builder: (_) => AdminHomePage())
                       : MaterialPageRoute(
-                          builder: (_) =>
-                              NavigationBarPage(selectedIndex: 1),
+                          builder: (_) => NavigationBarPage(selectedIndex: 1),
                         );
                   Navigator.pushReplacement(context, route);
                 }

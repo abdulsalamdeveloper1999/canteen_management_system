@@ -361,11 +361,11 @@ placeOrder(BuildContext context, double total) async {
 
     // Check user balance
     final userData = await userRef.doc(currentUser.uid).get();
-    if (!userData.exists || userData.data()!['balance'] < total) {
-      hideLoadingDialog(context);
-      toast("You don't have sufficient balance to place this order!");
-      return;
-    }
+    // if (!userData.exists || userData.data()!['balance'] < total) {
+    //   hideLoadingDialog(context);
+    //   toast("You don't have sufficient balance to place this order!");
+    //   return;
+    // }
 
     // Get cart items
     final cartSnapshot =
@@ -390,7 +390,8 @@ placeOrder(BuildContext context, double total) async {
         "item_id": item.id,
         "count": count[item.id],
         "item_name": item.data()['item_name'],
-        "price": item.data()['price']
+        "price": item.data()['price'],
+        'status': 'pending'
       });
     }
 
