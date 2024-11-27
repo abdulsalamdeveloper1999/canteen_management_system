@@ -1,21 +1,14 @@
 import 'dart:developer';
-import 'dart:io';
 import 'package:canteen_food_ordering_app/notifiers/cloundindary_service.dart';
 import 'package:canteen_food_ordering_app/notifiers/image_handler.dart';
 import 'package:canteen_food_ordering_app/screens/food_card_widget.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:canteen_food_ordering_app/apis/foodAPIs.dart';
 import 'package:canteen_food_ordering_app/notifiers/authNotifier.dart';
 import 'package:canteen_food_ordering_app/widgets/customRaisedButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:canteen_food_ordering_app/models/food.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class AdminHomePage extends StatefulWidget {
@@ -57,7 +50,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           IconButton(
             icon: Icon(
               Icons.exit_to_app,
-              color: Colors.white,
+              color: Colors.black,
             ),
             onPressed: () {
               signOutUser();

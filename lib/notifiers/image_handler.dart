@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:cloudinary/cloudinary.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -34,7 +33,4 @@ class ImagePickerProvider extends ChangeNotifier {
     _imageBytes = null;
     notifyListeners();
   }
-
-  
-
 }

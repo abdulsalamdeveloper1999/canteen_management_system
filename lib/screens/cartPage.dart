@@ -33,10 +33,13 @@ class _CartPageState extends State<CartPage> {
         ),
         // ignore: unrelated_type_equality_checks
         body: (authNotifier.userDetails.uuid == Null)
-            ? Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Text("No Items to display"),
+            ? Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  // width: MediaQuery.of(context).size.width * 0.6,
+                  child: Text("No Items to display"),
+                ),
               )
             : cartList(context));
   }
@@ -70,8 +73,9 @@ class _CartPageState extends State<CartPage> {
                     context, authNotifier.userDetails.uuid, foodIds, count);
               } else {
                 return Container(
+                  alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  width: MediaQuery.of(context).size.width * 0.6,
+                  // width: MediaQuery.of(context).size.width * 0.6,
                   child: Text("No Items to display"),
                 );
               }
