@@ -24,11 +24,7 @@ void toast(String data) {
 }
 
 login(User user, AuthNotifier authNotifier, BuildContext context) async {
-  ProgressDialog pr = ProgressDialog(context);
-  pr = ProgressDialog(context,
-      type: ProgressDialogType.normal, isDismissible: false, showLogs: false);
-  pr.show();
-
+  showLoadingDialog(context);
   try {
     final userCredential = await auth.FirebaseAuth.instance
         .signInWithEmailAndPassword(email: user.email, password: user.password);
@@ -36,7 +32,7 @@ login(User user, AuthNotifier authNotifier, BuildContext context) async {
     if (userCredential.user != null) {
       // if (!userCredential.user!.emailVerified) {
       //   await auth.FirebaseAuth.instance.signOut();
-      //   pr.hide();
+      //   hideLoadingDialog(context);
       //   toast("Email ID not verified");
       //   return;
       // }
@@ -45,7 +41,7 @@ login(User user, AuthNotifier authNotifier, BuildContext context) async {
       authNotifier.setUser(userCredential.user!);
       await getUserDetails(authNotifier);
       log("done");
-      pr.hide();
+      hideLoadingDialog(context);
 
       if (authNotifier.userDetails.role == 'admin') {
         Navigator.pushReplacement(
@@ -62,7 +58,7 @@ login(User user, AuthNotifier authNotifier, BuildContext context) async {
       }
     }
   } catch (error) {
-    pr.hide();
+    hideLoadingDialog(context);
     toast(error.toString());
     log(error.toString());
     return;
@@ -70,9 +66,7 @@ login(User user, AuthNotifier authNotifier, BuildContext context) async {
 }
 
 signUp(User user, AuthNotifier authNotifier, BuildContext context) async {
-  final pr = ProgressDialog(context,
-      type: ProgressDialogType.normal, isDismissible: false, showLogs: false);
-  pr.show();
+  showLoadingDialog(context);
   bool userDataUploaded = false;
 
   try {
@@ -88,12 +82,12 @@ signUp(User user, AuthNotifier authNotifier, BuildContext context) async {
       await uploadUserData(user, userDataUploaded);
       await auth.FirebaseAuth.instance.signOut();
       authNotifier.setUser(null);
-      pr.hide();
+      hideLoadingDialog(context);
       // toast("Verification link is sent to ${user.email}");
       Navigator.pop(context);
     }
   } catch (error) {
-    pr.hide();
+    hideLoadingDialog(context);
     toast(error.toString());
     log(error.toString());
     return;
@@ -150,16 +144,14 @@ signOut(AuthNotifier authNotifier, BuildContext context) async {
 
 forgotPassword(
     User user, AuthNotifier authNotifier, BuildContext context) async {
-  final pr = ProgressDialog(context,
-      type: ProgressDialogType.normal, isDismissible: false, showLogs: false);
-  pr.show();
+  showLoadingDialog(context);
   try {
     await auth.FirebaseAuth.instance.sendPasswordResetEmail(email: user.email);
-    pr.hide();
+    hideLoadingDialog(context);
     toast("Reset Email has sent successfully");
     Navigator.pop(context);
   } catch (error) {
-    pr.hide();
+    hideLoadingDialog(context);
     toast(error.toString());
     log(error.toString());
   }
@@ -229,9 +221,7 @@ removeFromCart(Food food, BuildContext context) async {
 
 addNewItem(String itemName, int price, int totalQty, BuildContext context,
     imageUrl) async {
-  final pr = ProgressDialog(context,
-      type: ProgressDialogType.normal, isDismissible: false, showLogs: false);
-  pr.show();
+  showLoadingDialog(context);
   try {
     final itemRef = FirebaseFirestore.instance.collection('items');
     await itemRef.add({
@@ -241,11 +231,11 @@ addNewItem(String itemName, int price, int totalQty, BuildContext context,
       "imageUrl": imageUrl,
     });
 
-    pr.hide();
+    hideLoadingDialog(context);
     Navigator.pop(context);
     toast("New Item added successfully!");
   } catch (error) {
-    pr.hide();
+    hideLoadingDialog(context);
     toast("Failed to add new item!");
     log(error.toString());
   }
@@ -253,9 +243,7 @@ addNewItem(String itemName, int price, int totalQty, BuildContext context,
 
 editItem(String itemName, int price, int totalQty, BuildContext context,
     String id, String images) async {
-  final pr = ProgressDialog(context,
-      type: ProgressDialogType.normal, isDismissible: false, showLogs: false);
-  pr.show();
+  showLoadingDialog(context);
   try {
     final itemRef = FirebaseFirestore.instance.collection('items');
     await itemRef.doc(id).set({
@@ -265,29 +253,27 @@ editItem(String itemName, int price, int totalQty, BuildContext context,
       'imageUrl': images
     });
 
-    pr.hide();
+    hideLoadingDialog(context);
     Navigator.pop(context);
     toast("Item edited successfully!");
   } catch (error) {
-    pr.hide();
+    hideLoadingDialog(context);
     toast("Failed to edit item!");
     log(error.toString());
   }
 }
 
 deleteItem(String id, BuildContext context) async {
-  final pr = ProgressDialog(context,
-      type: ProgressDialogType.normal, isDismissible: false, showLogs: false);
-  pr.show();
+  showLoadingDialog(context);
   try {
     final itemRef = FirebaseFirestore.instance.collection('items');
     await itemRef.doc(id).delete();
 
-    pr.hide();
+    hideLoadingDialog(context);
     Navigator.pop(context);
     toast("Item deleted successfully!");
   } catch (error) {
-    pr.hide();
+    hideLoadingDialog(context);
     toast("Failed to delete item!");
     log(error.toString());
   }
@@ -454,9 +440,7 @@ placeOrder(BuildContext context, double total) async {
 }
 
 orderReceived(String id, BuildContext context) async {
-  final pr = ProgressDialog(context,
-      type: ProgressDialogType.normal, isDismissible: false, showLogs: false);
-  pr.show();
+  showLoadingDialog(context);
 
   try {
     CollectionReference ordersRef =
@@ -467,16 +451,12 @@ orderReceived(String id, BuildContext context) async {
         .catchError((e) => log(e))
         .then((value) => log("Success"));
   } catch (error) {
-    pr.hide().then((isHidden) {
-      log(isHidden.toString());
-    });
+    hideLoadingDialog(context);
     toast("Failed to mark as received!");
     log(error.toString());
     return;
   }
-  pr.hide().then((isHidden) {
-    log(isHidden.toString());
-  });
+  hideLoadingDialog(context);
   Navigator.pop(context);
   toast("Order received successfully!");
 }

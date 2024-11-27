@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 
-import 'cloundindary_service.dart'; // Import the Cloudinary service
+// Import the Cloudinary service
 
 class ImagePickerProvider extends ChangeNotifier {
   FilePickerResult? _pickedImage;
@@ -11,7 +11,7 @@ class ImagePickerProvider extends ChangeNotifier {
   FilePickerResult? get pickedImage => _pickedImage;
   Uint8List? get imageBytes => _imageBytes;
 
-  final CloudinaryService _cloudinaryService = CloudinaryService();
+  // final CloudinaryService _cloudinaryService = CloudinaryService();
 
   // Pick image
   Future<void> pickImage() async {
